@@ -1,10 +1,6 @@
 ##Installing packages
 library(tidyverse)
 
-#setwd("C:\Users\julia\Desktop\Chapter_II_CC_GEB")
-
-#ClimaSPSW_new <- read_delim("C:\\Users\\julia\\OneDrive - Universidad de Alcala\\Doctorado\\CHAPTER_II_BIOMASS\\Files\\Resubmission GEC\\Revision_II\\Data_CC_GEB.csv", delim = ";", col_names = T, locale = locale(decimal_mark = ","))
-
 
 ####Limpieza de datos
 ClimaSPSW_new <- ClimaSPSW_new %>% 
