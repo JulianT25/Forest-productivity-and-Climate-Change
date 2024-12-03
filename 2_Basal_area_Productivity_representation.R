@@ -2,20 +2,30 @@
 library(ggsignif)
 ##################################BASAL AREA DYNAMICS
 BA_evol <- ClimaSPSW_new %>% 
-  mutate( 
-    Biome = str_replace(Biome, "Temp_north", "Temperate \n north"),
-    Biome = str_replace(Biome, "Temp_south", "Temperate \n south")
+  mutate(
+    Biome = case_when(
+      Biome == "Temp_north" ~ "Temperate \n north",
+      Biome == "Temp_south" ~ "Temperate \n south",
+      TRUE ~ Biome
+    )
+  ) %>% 
+  mutate(
+    Biome = as.factor(Biome)
+  ) %>% 
+  mutate(
+    Biome = fct_relevel(Biome, "Mediterranean", "Temperate \n south", "Temperate \n north", "Boreal")
   ) %>% 
   rename(
     NFI1 = ba_ha2,
     NFI2 = ba_ha3,
     NFI3 = ba_ha4
-  ) %>%
-  mutate(
-    Biome = as.factor(Biome)) %>%
-  mutate(Biome = fct_relevel(Biome, "Mediterranean", "Temperate south", "Temperate north", "Boreal")) %>% 
+  ) %>% 
   select(NFI1, NFI2, NFI3, Biome) %>% 
-  pivot_longer(cols = starts_with("NFI"), names_to = "years", values_to = "values") %>%
+  pivot_longer(
+    cols = starts_with("NFI"),
+    names_to = "years",
+    values_to = "values"
+  ) %>% 
   ggplot(aes(x = years, y = values, fill = years)) +
   geom_boxplot(aes(fill = Biome, alpha = factor(years)), outlier.shape = NA) +
   scale_alpha_manual(values = c(0.2, 0.4, 0.7)) +
@@ -25,7 +35,7 @@ BA_evol <- ClimaSPSW_new %>%
   labs(
     y = expression("Stand basal area (m"^2 * "/ha"^{-1} * ")"),
     x = ""
-  ) + 
+  ) +
   scale_x_discrete(labels = c(
     "NFI1" = expression(NFI[1]),
     "NFI2" = expression(NFI[2]),
