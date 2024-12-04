@@ -24,7 +24,7 @@ Table_Biome_Temp <- ClimaSPSW_new %>%
   )
 Table_Biome_Temp
 
-write.csv(Table_Biome_Temp, "C:\\Users\\julia\\Desktop\\Chapter_II_CC_GEB\\Tablas\\Table_Biome_Temp.csv", row.names = FALSE)
+
 
 Table_Rates_Temp <- ClimaSPSW_new %>% 
   mutate(
@@ -178,7 +178,7 @@ Table_Biome_BA <- ClimaSPSW_new %>%
     Biome = as.factor(Biome), 
     Biome = fct_relevel(Biome, c("Mediterranean", "Temp_south", "Temp_north", "Boreal"))
   ) %>% 
-  group_by(Biome, FG1) %>%   
+  group_by(Biome) %>%   
   summarise(
     ba1_sd = round(sd(ba_ha2, na.rm = TRUE), 2),
     ba1 = round(mean(ba_ha2, na.rm = TRUE), 2),
@@ -203,7 +203,7 @@ Table_Biome_BArates <- ClimaSPSW_new %>%
     Biome = as.factor(Biome), 
     Biome = fct_relevel(Biome, c("Mediterranean", "Temp_south", "Temp_north", "Boreal"))
   ) %>% 
-  group_by(Biome, FG1) %>%   
+  group_by(Biome) %>%   
   summarise(
     ba1_sd = round(sd(ratesAB32, na.rm = TRUE), 2),
     ba1 = round(mean(ratesAB32, na.rm = TRUE), 2),
@@ -225,7 +225,7 @@ Table_Biome_percProduct <- ClimaSPSW_new %>%
     Biome = as.factor(Biome), 
     Biome = fct_relevel(Biome, c("Mediterranean", "Temp_south", "Temp_north", "Boreal"))
   ) %>% 
-  group_by(Biome, FG1) %>%   
+  group_by(Biome) %>%   
   summarise(
     ba1_sd = round(sd(rAB32rel, na.rm = TRUE), 2),
     ba1 = round(mean(rAB32rel, na.rm = TRUE), 2),
@@ -417,3 +417,4 @@ Table_Biome_percProduct <- ClimaSPSW_new %>%
     ba2min = round(min(rAB43rel, na.rm = TRUE), 2)
   ) 
 Table_Biome_percProduct
+

@@ -1,5 +1,5 @@
 
-Variable_Impoortance <- VarImp_Rev2 %>% 
+Variable_Impoortance <- VarImp_GEB %>% 
   #filter(Biome == "Boreal") %>%
   #filter(Prelative > 0) %>%
   mutate(
